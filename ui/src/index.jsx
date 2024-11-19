@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import SigninPage from "./components/pages/signinPage";
 import SignupPage from "./components/pages/signupPage";
+import HomePage from "./components/pages/homePage";
+import ResultsPage from "./components/pages/resultsPage";
 
 import "./index.sass";
 
@@ -18,6 +20,12 @@ root.render(
           </Route>
           <Route path="/">
             <SigninPage />
+          </Route>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+          <Route path="/results">
+            <ResultsPage />
           </Route>
         </Switch>
       </Router>
