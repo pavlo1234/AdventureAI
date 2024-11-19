@@ -17,11 +17,11 @@ root.render(
     <React.Fragment>
       <Router>
         <Switch>
-          <Route path="/signup">
-            <SignupPage />
+        <Route path="/card/:cardId">
+            <CardDetailsPage />
           </Route>
-          <Route path="/">
-            <SigninPage />
+          <Route path="/preferences">
+            <PreferencesPage />
           </Route>
           <Route path="/home">
             <HomePage />
@@ -29,11 +29,11 @@ root.render(
           <Route path="/results">
             <ResultsPage />
           </Route>
-          <Route path="/preferences">
-            <PreferencesPage />
+          <Route path="/signup">
+            <SignupPage />
           </Route>
-          <Route path="/card/:cardId">
-            <CardDetailsPage />
+          <Route path="/">
+            <SigninPage />
           </Route>
         </Switch>
       </Router>

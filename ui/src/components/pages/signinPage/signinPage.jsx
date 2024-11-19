@@ -11,6 +11,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockIcon from "@mui/icons-material/Lock";
 import IconButton from "@mui/material/IconButton";
 import Header from "../../header";
+import axios from 'axios'
+import { API_URL } from '../../../utils/constants'
 
 import "./signinPage.sass";
 
@@ -29,17 +31,16 @@ const SigninPage = () => {
   };
 
   const handleLogin = () => {
-    history.replace("/home");
-    // axios
-    //   .post("", { username, password })
-    //   .then(() => {
+    axios
+      .post(`${API_URL}sign-in/`, { email: username, password })
+      .then(() => {
         sessionStorage.setItem("username", username);
-    //     history.replace("/home");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Sign in error:", error);
-    //     setMessage(error.message);
-    //   });
+        history.replace("/home");
+      })
+      .catch((error) => {
+        console.error("Sign in error:", error);
+        setMessage(error.message);
+      });
   };
   return (
     <div className="sign-in-page">
@@ -48,7 +49,7 @@ const SigninPage = () => {
         <div className="sign-in-page-header">Sign in</div>
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-adornment-username">
-            Username
+            Email
           </InputLabel>
           <OutlinedInput
             id="outlined-basic"
