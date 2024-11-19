@@ -7,6 +7,7 @@ import SignupPage from "./components/pages/signupPage";
 import HomePage from "./components/pages/homePage";
 import ResultsPage from "./components/pages/resultsPage";
 import PreferencesPage from "./components/pages/preferencesPage";
+import CardDetailsPage from "./components/pages/cardDetailsPage";
 
 import "./index.sass";
 
@@ -30,6 +31,9 @@ root.render(
           </Route>
           <Route path="/preferences">
             <PreferencesPage />
+          </Route>
+          <Route path="/card/:cardId">
+            <CardDetailsPage />
           </Route>
         </Switch>
       </Router>
