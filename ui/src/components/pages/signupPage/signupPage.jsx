@@ -13,6 +13,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockIcon from "@mui/icons-material/Lock";
 import IconButton from "@mui/material/IconButton";
 import Header from "../../header";
+import { API_URL } from '../../../utils/constants'
 
 import "./signupPage.sass";
 
@@ -34,12 +35,13 @@ const SignupPage = () => {
 
   const handleRegistration = () => {
     axios
-      .post("", {
-        username,
+      .post(`${API_URL}sign-up/`, {
+        email: username,
         password,
       })
       .then(() => {
-        history.replace("/");
+        sessionStorage.setItem("username", username);
+        history.replace("/home");
       })
       .catch((error) => {
         setMessage(error.message);
@@ -53,7 +55,7 @@ const SignupPage = () => {
         <div className="sign-up-page-header">Sign up</div>
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-adornment-username">
-            Username
+            Email
           </InputLabel>
           <OutlinedInput
             id="outlined-basic"
