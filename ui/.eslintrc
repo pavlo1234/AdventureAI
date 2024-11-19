@@ -5,15 +5,21 @@
     "es6": true
   },
 
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
 
   "globals": {
     "env": true
   },
-  "plugins": ["eslint-plugin-react"],
+  "plugins": ["eslint-plugin-react", "react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     // "semi": ["error", "never"],
     "quotes": ["error", "double"],
