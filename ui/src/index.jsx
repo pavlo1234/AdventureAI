@@ -6,6 +6,7 @@ import SigninPage from "./components/pages/signinPage";
 import SignupPage from "./components/pages/signupPage";
 import HomePage from "./components/pages/homePage";
 import ResultsPage from "./components/pages/resultsPage";
+import PreferencesPage from "./components/pages/preferencesPage";
 
 import "./index.sass";
 
@@ -26,6 +27,9 @@ root.render(
           </Route>
           <Route path="/results">
             <ResultsPage />
+          </Route>
+          <Route path="/preferences">
+            <PreferencesPage />
           </Route>
         </Switch>
       </Router>
