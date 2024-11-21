@@ -30,6 +30,7 @@ urlpatterns = [
 
     path("api/activities/", include("activities.urls")),
     path("api/preferences/", include("preferences.urls")),
+    path("api/recommendations/", include("recommendations.urls")),
 
 
     path('schema/', SpectacularAPIView.as_view(), name='schema'),

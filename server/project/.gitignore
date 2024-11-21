@@ -1,1 +1,5 @@
 project/__pycache__/**
+activities/__pycache__/**
+preferences/__pycache__/**
+recommendations/__pycache__/**
+

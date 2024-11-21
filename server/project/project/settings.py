@@ -17,6 +17,7 @@ import environ
 import os
 
 env = environ.Env(
+
     DEBUG=(bool, False)
 )
 
@@ -37,7 +38,6 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'activities',
-    'preferences'
+    'preferences',
+    'recommendations'
 ]
 
 MIDDLEWARE = [
