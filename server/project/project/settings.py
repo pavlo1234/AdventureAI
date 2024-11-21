@@ -13,22 +13,30 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 
+import environ
+import os
+
+env = environ.Env(
+
+    DEBUG=(bool, False)
+)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3iu=d&i!h$@w=)8o8=nxm87d=)^%85+w%bu!a(1x&rcg(+88-8'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ['ec2-13-48-249-206.eu-north-1.compute.amazonaws.com', '127.0.0.1']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -42,7 +50,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    'drf_spectacular_sidecar'
+    'drf_spectacular_sidecar',
+    'activities',
+    'preferences',
+    'recommendations'
 ]
 
 MIDDLEWARE = [
@@ -80,14 +91,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'adventure_ai',
-        'USER': 'postgres',
-        'PASSWORD': 'password111',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
+    'default': env.db()
 }
 
 
@@ -113,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
