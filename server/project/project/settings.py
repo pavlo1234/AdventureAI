@@ -17,6 +17,7 @@ import environ
 import os
 
 env = environ.Env(
+
     DEBUG=(bool, False)
 )
 
@@ -51,7 +52,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'activities',
-    'preferences'
+    'preferences',
+    'recommendations'
 ]
 
 MIDDLEWARE = [
