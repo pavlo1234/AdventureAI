@@ -35,10 +35,15 @@ const SignupPage = () => {
 
   const handleRegistration = () => {
     axios
-      .post(`${API_URL}sign-up/`, {
-        email: username,
-        password,
-      })
+       .post(
+        `${API_URL}sign-up/`,
+        { email: username, password },
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          }
+        }
+      )
       .then(() => {
         sessionStorage.setItem("username", username);
         history.replace("/home");
