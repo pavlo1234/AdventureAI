@@ -1,2 +1,6 @@
 project/__pycache__/**
+activities/__pycache__/**
+preferences/__pycache__/**
+recommendations/__pycache__/**
 *.zip
+.env
