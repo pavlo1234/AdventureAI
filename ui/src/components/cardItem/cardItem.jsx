@@ -6,7 +6,10 @@ const CardItem = ({ card }) => {
   const history = useHistory();
 
   const handleCardClick = () => {
-    history.push(`/card/${card.id}`); 
+    history.replace({
+      pathname: `/card/${card.id}`,
+      state: { cardId: card.id },
+    });
   };
 
   return (
@@ -20,11 +23,11 @@ const CardItem = ({ card }) => {
       ></div>
       <div className="card-content">
         <div className="card-data">
-          <h2 className="card-title">{card.title}</h2>
-          <p className="card-location">{card.location}</p>
+          <h2 className="card-title">{card.header}</h2>
+          <p className="card-location">{ `${card.location.city}, ${card.location.country}`}</p>
         </div>
         <div className="card-category">
-          <div>{card.category}</div>
+          <div>{card.kind}</div>
         </div>
       </div>
     </div>

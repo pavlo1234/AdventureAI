@@ -27,7 +27,7 @@ const PreferenceList = ({ preferenceData, preferenceHeader, onSelectionChange })
             icon={preference.icon}
             label={preference.label}
             onClick={() => handlePreferenceClick(preference.label)}
-            isSelected={selectedItems.includes(preference.id)}
+            isSelected={selectedItems.includes(preference.label)}
           />
         ))}
       </div>
