@@ -2,33 +2,32 @@ import React, { useState } from "react";
 import PreferenceItem from "../preferenceItem";
 import "./preferenceList.sass";
 
-const PreferenceList = ({ preferenceData }) => {
+const PreferenceList = ({ preferenceData, preferenceHeader, onSelectionChange }) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handlePreferenceClick = (id) => {
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter(itemId => itemId !== id); 
-      } else {
-        return [...prevSelectedItems, id];
-      }
-    });
-  };
+   const handlePreferenceClick = (label) => {
+      setSelectedItems((prevSelectedItems) => {
+        const updatedSelectedItems = prevSelectedItems.includes(label)
+          ? prevSelectedItems.filter((itemLabel) => itemLabel !== label)  // Remove label if already selected
+          : [...prevSelectedItems, label];  // Add label if not already selected
 
-  console.log("Selected Items:", selectedItems);
+        onSelectionChange(updatedSelectedItems);  // Pass updated labels to parent
+        return updatedSelectedItems;  // Return updated state
+      });
+    };
 
   return (
     <div className="preference-list">
-      <h2 className="preference-list-header">{preferenceData.header}</h2>{" "}
+      <h2 className="preference-list-header">{preferenceHeader}</h2>{" "}
       <div className="preference-items">
-        {preferenceData.preferences.map((preference) => (
+        {preferenceData?.map((preference) => (
           <PreferenceItem
             key={preference.id}
             id={preference.id}
             icon={preference.icon}
             label={preference.label}
-            onClick={handlePreferenceClick}
-            isSelected={selectedItems.includes(preference.id)} 
+            onClick={() => handlePreferenceClick(preference.label)}
+            isSelected={selectedItems.includes(preference.id)}
           />
         ))}
       </div>

@@ -32,9 +32,18 @@ const SigninPage = () => {
 
   const handleLogin = () => {
     axios
-      .post(`${API_URL}sign-in/`, { email: username, password })
-      .then(() => {
+      .post(
+        `${API_URL}sign-in/`,
+        { email: username, password },
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          }
+        }
+      )
+      .then((response) => {
         sessionStorage.setItem("username", username);
+        sessionStorage.setItem("token", response.data.access);
         history.replace("/home");
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../../header";
 import TextField from "@mui/material/TextField";
@@ -7,10 +7,14 @@ import "./homePage.sass";
 
 const HomePage = () => {
   const history = useHistory();
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
 
   const handleNext = () => {
-    history.replace("/preferences");
-    console.log("next click");
+    history.replace({
+    pathname: "/preferences",
+    state: { city, country },
+  });
   };
 
   return (
@@ -30,18 +34,29 @@ const HomePage = () => {
             label="Enter the city you want to visit"
             variant="outlined"
             fullWidth
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+           <TextField
+            className="home-input"
+            label="Enter the country you want to visit"
+            variant="outlined"
+            fullWidth
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
           />
         </div>
         <div className="home-page-action">
-        <Button
-          onClick={handleNext}
-          variant="contained"
-          size={"large"}
-          style={{ backgroundColor: "var(--black)" }}
-        >
-          Next
-        </Button>
-      </div>
+          <Button
+            onClick={handleNext}
+            variant="contained"
+            size={"large"}
+            style={{ backgroundColor: "var(--black)" }}
+            disabled={!city || !country}
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );
