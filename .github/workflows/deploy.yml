@@ -1,0 +1,39 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - backend-deploy  # або інша гілка, на яку ви хочете налаштувати автоматичне розгортання
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH }}
+
+      - name: Deploy to EC2
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-13-60-58-213.eu-north-1.compute.amazonaws.com << 'EOF'
+            # Команди розгортання на сервері EC2
+            cd /home/ubuntu/AdventureAI
+            git pull origin backend-deploy -r # Або інша відповідна гілка 
+            source env/bin/activate
+            pip cache purge
+            TMPDIR=/home/user/tmp/ pip install --no-cache-dir -r server/project/requirements.txt
+            python server/project/manage.py makemigrations
+            python server/project/manage.py migrate
+            python server/project/manage.py collectstatic --noinput
+            sudo systemctl daemon-reload
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx
+          EOF
