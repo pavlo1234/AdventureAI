@@ -36,7 +36,10 @@ const PreferencesPage = () => {
     axios
       .post(`${API_URL}recommendations/`, requestBody, { headers })
       .then((response) => {
-        history.replace("/results");
+         history.replace({
+            pathname: '/results',
+            state: { recommendations: response.data },
+         });
       })
       .catch((error) => {
         console.error("Error making the request:", error);

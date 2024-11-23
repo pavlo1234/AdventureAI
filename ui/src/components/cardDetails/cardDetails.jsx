@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./cardDetails.sass";
+import axios from 'axios';
+import { API_URL } from '../../utils/constants'
 
-const CardDetails = ({ header, location, type, aboutTitle, description, images }) => {
+const CardDetails = ({ header, location, kind, desc, images }) => {
   return (
     <div className="card-details-wrapper">
-      <div className="card-details-images">{images}</div>
+{/*       <div className="card-details-images">{images}</div> */}
       <div className="card-details-info">
         <h2 className="card-details-info-header">{header}</h2>
-        <h5 className="card-details-info-location">{location}</h5>
-        <h3 className="card-details-info-type">{type}</h3>
-        <span>{aboutTitle}:</span>
-        <p className="card-details-description">{description}</p>
+        <h5 className="card-details-info-location">{ `${location?.city}, ${location?.country}`}</h5>
+        <h3 className="card-details-info-type">{kind}</h3>
+        <span>About:</span>
+        <p className="card-details-description">{desc}</p>
       </div>
     </div>
   );

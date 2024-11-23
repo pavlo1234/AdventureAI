@@ -91,15 +91,15 @@ const ResultsPage = () => {
       ],
     },
   ];
-
   
   return (
     <div className="results-page">
       <Header />
-      {recommendationItemsMock.map((item, index) => (
-        <RecommendationItem key={index} {...item} />
-      ))}
+      <RecommendationItem />
     </div>
+    //       {recommendationItemsMock.map((item, index) => (
+//         <RecommendationItem key={index} {...item} />
+//       ))}
   );
 };
 
