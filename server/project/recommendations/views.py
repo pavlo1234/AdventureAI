@@ -28,7 +28,13 @@ def recommend(request):
     serialized.is_valid()
 
     location, tags = serialized.data['location'], serialized.data['tags']
-    choices = Activity.objects.filter(location__city=location["city"], location__country=location["country"])
+    if(location["city"] != '' or location["country"] != ''):
+        if(location["city"] != ''):
+            choices = Activity.objects.filter(location__city=location["city"])
+        if(location["country"] != ''):
+            choices = Activity.objects.filter(location__country=location["country"])
+    else:
+        choices = Activity.objects.all()   
         
     choosen = algorithms.choose_relevant(choices, tags)
 
@@ -37,4 +43,4 @@ def recommend(request):
         'activities' : choosen
     })
     
-    return Response(data=response.data, status=400)
+    return Response(data=response.data, status=200)

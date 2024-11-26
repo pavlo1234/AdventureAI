@@ -1,2 +1,11 @@
 project/__pycache__/**
+project/migrations/**
+activities/__pycache__/**
+activities/migrations/**
+preferences/__pycache__/**
+preferences/migrations/**
+recommendations/__pycache__/**
+recommendations/migrations/**
 *.zip
+.env
+static/**
