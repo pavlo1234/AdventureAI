@@ -5,7 +5,7 @@ import CardList from "../cardList";
 import axios from 'axios';
 import { API_URL } from '../../utils/constants'
 
-const RecommendationItem = ({ description = 'description', isAdventureAIrecommendation = false }) => {
+const RecommendationItem = ({ isAdventureAIrecommendation = false }) => {
    const location = useLocation();
 
   const recommendations = location.state?.recommendations;
@@ -13,7 +13,7 @@ const RecommendationItem = ({ description = 'description', isAdventureAIrecommen
   return (
     <div className="recomendation-item">
       <div className={`recomendation-item-header ${isAdventureAIrecommendation ? 'header-bold' : ''}`}>{recommendations.header}</div>
-      <div className="recomendation-item-description">{description}</div>
+{/*         <div className="recomendation-item-description">{description}</div> */}
       <CardList mockCardData={recommendations.activities} />
     </div>
   );

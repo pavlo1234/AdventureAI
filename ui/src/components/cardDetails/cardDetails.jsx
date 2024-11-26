@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./cardDetails.sass";
 import axios from 'axios';
+import ImageCarousel from "../imageCarousel/imageCarousel";
 import { API_URL } from '../../utils/constants'
 
 const CardDetails = ({ header, location, kind, desc, images }) => {
   return (
     <div className="card-details-wrapper">
-{/*       <div className="card-details-images">{images}</div> */}
+      <div className="card-details-images">
+        <ImageCarousel images={images?.map(image => image.url)} />
+      </div>
       <div className="card-details-info">
         <h2 className="card-details-info-header">{header}</h2>
         <h5 className="card-details-info-location">{ `${location?.city}, ${location?.country}`}</h5>

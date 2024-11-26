@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../../header";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
 import "./homePage.sass";
 
 const HomePage = () => {
   const history = useHistory();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const [isUnsure, setIsUnsure] = useState(false); // Track the "unsure" state
 
   const handleNext = () => {
     history.replace({
-    pathname: "/preferences",
-    state: { city, country },
-  });
+      pathname: "/preferences",
+      state: { city: isUnsure ? "" : city, country: isUnsure ? "" : country },
+    });
   };
 
   return (
@@ -36,14 +36,27 @@ const HomePage = () => {
             fullWidth
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            disabled={isUnsure}
           />
-           <TextField
+          <TextField
             className="home-input"
             label="Enter the country you want to visit"
             variant="outlined"
             fullWidth
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            disabled={isUnsure}
+          />
+          <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isUnsure}
+                  onChange={(e) => setIsUnsure(e.target.checked)}
+                  color="primary"
+                />
+              }
+              label="I don't know my preferred destination"
+              className="home-checkbox"
           />
         </div>
         <div className="home-page-action">
@@ -51,8 +64,11 @@ const HomePage = () => {
             onClick={handleNext}
             variant="contained"
             size={"large"}
-            style={{ backgroundColor: "var(--black)" }}
-            disabled={!city || !country}
+            style={{
+              backgroundColor: "var(--black)",
+              color: !isUnsure && (!city || !country) ? "grey" : "white",
+            }}
+            disabled={!isUnsure && (!city || !country)}
           >
             Next
           </Button>
